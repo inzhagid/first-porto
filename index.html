@@ -225,16 +225,30 @@
         </div>
 
         <div class="row justify-content-center">
-          <div class="col-md-4">
-            <form>
+          <div class="col-md-6">
+            <div
+              class="alert alert-success alert-dismissible fade show d-none pesan-kirim"
+              role="alert"
+            >
+              <strong>Terima Kasih!</strong> Pesan anda sudah kami terima.
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form name="submit-to-google-sheet">
               <div class="mb-3">
-                <label for="name" class="form-label">Nama Lengkap</label>
+                <label for="nama" class="form-label">Nama Lengkap</label>
                 <input
                   type="text"
                   class="form-control"
                   id="name"
+                  name="nama"
                   aria-describedby="name"
                   placeholder="Inzhagi Diansyah"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -243,20 +257,37 @@
                   type="email"
                   class="form-control"
                   id="email"
+                  name="email"
                   aria-describedby="emailHelp"
                   placeholder="name@example.com"
+                  required
                 />
               </div>
               <div class="mb-3">
-                <label for="pesan" class="form-label">Peasn</label>
+                <label for="pesan" class="form-label">Pesan</label>
                 <textarea
                   class="form-control"
                   id="pesan"
+                  name="pesan"
                   rows="4"
                   placeholder="Tulis pesan di sini"
+                  required
                 ></textarea>
               </div>
-              <button type="submit" class="btn btn-dark">Submit</button>
+              <button type="submit" class="btn btn-dark tombol-submit">
+                Submit
+              </button>
+              <button
+                class="btn btn-dark d-none load-btn"
+                type="button"
+                disabled
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+                <span role="status">Loading...</span>
+              </button>
             </form>
           </div>
         </div>
@@ -294,5 +325,39 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Contact Form -->
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyM3D0ZEsLfGunh5uniuY_3WHikOy5oT3rMWzq-D0zStqJDwsgqQzRpXkWgC2WAsQC2/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const alertSent = document.querySelector(".pesan-kirim");
+      const btnSubmit = document.querySelector(".tombol-submit");
+      const btnLoading = document.querySelector(".load-btn");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Tombol diklik => menampilkan loading, menghilangkan button submit
+        btnLoading.classList.toggle("d-none");
+        btnSubmit.classList.toggle("d-none");
+
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            // menampilkan button submit, menghilangkan loading
+            btnLoading.classList.toggle("d-none");
+            btnSubmit.classList.toggle("d-none");
+
+            // menampilkan alert pesan terkirim
+            alertSent.classList.toggle("d-none");
+
+            // setelah pesan berhasil dikirim, reset form
+            form.reset();
+
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
   </body>
 </html>
