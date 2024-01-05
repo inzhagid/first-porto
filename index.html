@@ -234,6 +234,54 @@
           </div>
         </div>
       </div>
+
+      <!-- Car's Start -->
+      <section id="my-cars">
+        <div class="container">
+          <div class="row text-center text-light mb-3">
+            <div class="col">
+              <h2 class="fw-bold">My Cars</h2>
+            </div>
+          </div>
+
+          <div class="row text-center">
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="car-box">
+                <h3 class="car-name text-light w-100 fw-bold">My First Car</h3>
+                <img
+                  src="img/gallery/car/blue_car.png"
+                  alt="Blue Car"
+                  class="car-img img-fluid"
+                />
+                <a href="" class="btn btn-light car-detail-btn">Show Details</a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="car-box">
+                <h3 class="car-name text-light w-100 fw-bold">My First Car</h3>
+                <img
+                  src="img/gallery/car/blue_car.png"
+                  alt="Blue Car"
+                  class="car-img img-fluid"
+                />
+                <a href="" class="btn btn-light car-detail-btn">Show Details</a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="car-box">
+                <h3 class="car-name text-light w-100 fw-bold">My First Car</h3>
+                <img
+                  src="img/gallery/car/blue_car.png"
+                  alt="Blue Car"
+                  class="car-img img-fluid"
+                />
+                <a href="" class="btn btn-light car-detail-btn">Show Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Car's End -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#ffffff"
@@ -537,6 +585,17 @@
         duration: 1,
         x: -100,
         ease: "back.out",
+      });
+    </script>
+
+    <!-- Tilt.js -->
+    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
+    <script type="text/javascript">
+      VanillaTilt.init(document.querySelectorAll(".car-box"), {
+        max: 30,
+        speed: 1000,
+        scale: 1.1,
+        glare: true,
       });
     </script>
   </body>
